@@ -2,7 +2,7 @@ def variables():
     # This function explains how to assign variables
     fname = "Emmanuel"  # This is a string variable by default
     sname = "Ezenwa"
-    full_name = f_name + S_name
+    full_name = fname + sname
     age = 3  # This is an integer variable
     print(type(full_name), type(age))  # This commandline prints the variable types
 
@@ -382,11 +382,11 @@ def task2():
 
 def task3():
     # Sum of even numbers within a range of numbers
-    sum = 0
+    add = 0
 
     for x in range(1, 11):
         if x % 2 == 0:
-            sum += x
+            add += x
             print(x)
 
 
@@ -549,7 +549,8 @@ def string_format():
     print("The {:<10} jumped over the {}".format(animal, item))  # left indentation of format field (default)
     print("The {:>10} jumped over the {}".format(animal, item))  # right indentation of format field
     print("The {:^10} jumped over the {}".format(animal, item))  # centre indentation of format field
-    print("The {1:^10} jumped over the {0:^10} at night".format(animal, item))  # indentation with values or variables in field
+    print("The {1:^10} jumped over the {0:^10} at night".format(animal, item))
+    # indentation with values or variables in field
 
     # Formatting numbers
 
@@ -558,7 +559,7 @@ def string_format():
     number = 1000000
     print("The number pi is {:,}".format(number))  # adding (,) to thousands in numbers
     print("The number pi is {:b}".format(number))  # converting a number to binary format
-    print("The number pi is {:o}".format(number))  # converting a number to octadecimal
+    print("The number pi is {:o}".format(number))  # converting a number to octa-decimal
     print("The number pi is {:X}".format(number))  # converting a number to hexadecimal
     print("The number pi is {:e}".format(number))  # converting a number to a decimal notation
 
@@ -568,6 +569,7 @@ def string_format():
 
 # Random numbers
 import random
+
 
 def random_numbers():
     # Random module is used to generate random number within a range
@@ -582,14 +584,55 @@ def random_numbers():
 
 
 def rock_paper_scissors():
-    my_list = ['rock', 'paper', 'scissors']
-    z = random.choice(my_list)  # This line prints random string from the list
-    print(z)
+    while True:
+        my_list = ['rock', 'paper', 'scissors']
+        comp = random.choice(my_list)  # This line prints random string from the list
+        # print(comp)
+        player = " "
+        while player not in my_list:
+            print("Select either rock, paper or scissors")
+            player = input("rock, paper, or scissors?: ").lower()
+        if player == comp:
+            print("Comp: ",comp)
+            print("You: ", player)
+            print("It's a TIE")
+        elif player == "rock":
+            if comp == "paper":
+                print("Comp: ", comp)
+                print("You: ", player)
+                print("You LOSE")
+            if comp == "scissors":
+                print("Comp: ", comp)
+                print("You: ", player)
+                print("You WIN")
+        elif player == "scissors":
+            if comp == "rock":
+                print("Comp: ", comp)
+                print("You: ", player)
+                print("You LOSE")
+            if comp == "paper":
+                print("Comp: ", comp)
+                print("You: ", player)
+                print("You WIN")
+        elif player == "paper":
+            if comp == "scissors":
+                print("Comp: ", comp)
+                print("You: ", player)
+                print("You LOSE")
+            if comp == "rock":
+                print("Comp: ", comp)
+                print("You: ", player)
+                print("You WIN")
+        play_again = input("\nPlay Again? Y / N: ").lower()
 
-    cards = [1,2,3,4,5,6,7,8,9,"J","Q","K","A"]
-    random.shuffle(cards)  # This line will shuffle the items in the list
+        if play_again != "y":
+            break
+        print("\n")
+    print("\nBye, See you some other time")
+    # cards = [1,2,3,4,5,6,7,8,9,"J","Q","K","A"]
+    # random.shuffle(cards)  # This line will shuffle the items in the list
 
-    print(cards)
+    # print(cards)
 
 # rock_paper_scissors()
 
@@ -640,15 +683,136 @@ def file():
 
 # file()
 
+def create_a_file():
+    try:
+        with open('test.txt', 'x') as file:
+            print("File Created successfully.")
+    except FileExistsError:
+        print("File with same name already Exist")
+
+
+# create_a_file()
+
+text = "This is Me testing write function again\n"
+app = "This part of the text will append to the end of existing text"
+
+
+def write_a_file():
+    loc = 'test.txt'
+    if os.path.exists(loc):
+        with open('test.txt', 'w') as file:
+            file.write(text)
+            print("File has been overwritten with text.")
+        with open('test.txt', 'a') as file:
+            file.writelines(app)
+            print("App text has been appended to the end of file")
+    else:
+        print("File not found")
+
+
+# write_a_file()
+
+
 def read_a_file():
     try:
-        with open("C:\\Users\\PRINCE\\Desktop\\test.tx") as file:
-            print(file.read())
-            print(file.closed)
+        with open("test.txt", 'r') as files:
+            print(files.read())
     except FileNotFoundError:
         print("The file was not found!")
 
+    print(files.closed)
 
-#read_a_file()
+
+# read_a_file()
 
 
+import shutil
+# First import shutil into your program before using the copy function
+# copyfile() = copies content of a file
+# copy() = does the function of copyfile + permission mode + destination
+# copy2() = does the function of copy() + copies metadata(file's creation and modification times)
+
+
+def copy_a_file():
+    shutil.copyfile('test.txt', 'copy.txt')
+    shutil.copy('test.txt', 'copy.txt')
+    shutil.copy2('test.txt', 'copy.txt')
+
+
+# copy_a_file()
+
+
+def  move_a_file():
+    source = "copy.txt"
+    destination = "C:\\Users\\PRINCE\\Desktop\\copy.txt"
+    try:
+        if os.path.exists(destination):
+            print("There's already a file there")
+        else:
+            os.replace(source, destination)
+            print(source, " was moved")
+    except FileNotFoundError:
+        print(source, "was not found")
+
+
+# move_a_file()
+
+
+def del_a_file():
+    path = 'copy.txt'
+    path2 = "folder"
+    path3 = "folder2"
+    try:
+        os.remove(path)  # This function deletes a file
+        print("File Deleted Successfully")
+        os.rmdir(path2)  # This deletes an empty directory
+        print("Folder Deleted Successfully")
+        shutil.rmtree(path3)  # This deletes directories that contains files
+        print("Folder with files Deleted Successfully")
+    except FileNotFoundError:
+        print("That File was not found.")
+    except PermissionError:
+        print("You do not have permission to delete the directory")
+    except OSError:
+        print("The directory you're trying to delete is not empty")
+
+
+# del_a_file()
+
+
+def modules():
+    # Module is a file that contain python code, may contain functions, classes etc
+    # It is used with modular programming, which is to separate a program into parts.
+    import messages
+    messages.hello()
+    messages.bye()
+    import messages as msg
+    msg.bye()
+    from messages import hello
+    hello()
+    help("modules")
+
+# modules()
+
+
+def new_game():
+    guesses = []
+def check():
+    pass
+def score():
+    pass
+def play_again():
+    pass
+
+
+questions = {
+    "Who created python?: ": "A",
+    "What year was python created?: ": "B",
+    "Python is attributed to which comedy group? ": "C",
+    "What is the shape of  the earth? ": "A"
+}
+
+options = [["A. Guido van Rossum", "B. Elon Musk", "C. Bill Gates", "D. Mark Zuckerberg"],
+           ["A. 1989", "B. 1991", "C. 2000", "D. 2016"],
+           ["A. Lonely Island", "B. Smosh", "C. Monty Python", "D. SNL"],
+           ["A. Circle", "B. Square", "C. Triangle", "D. Sphere"]]
