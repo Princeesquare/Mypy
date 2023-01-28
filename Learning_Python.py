@@ -580,6 +580,7 @@ def random_numbers():
     print(x)
     print(y)
 
+
 # random_numbers()
 
 
@@ -593,7 +594,7 @@ def rock_paper_scissors():
             print("Select either rock, paper or scissors")
             player = input("rock, paper, or scissors?: ").lower()
         if player == comp:
-            print("Comp: ",comp)
+            print("Comp: ", comp)
             print("You: ", player)
             print("It's a TIE")
         elif player == "rock":
@@ -633,6 +634,7 @@ def rock_paper_scissors():
     # random.shuffle(cards)  # This line will shuffle the items in the list
 
     # print(cards)
+
 
 # rock_paper_scissors()
 
@@ -727,6 +729,8 @@ def read_a_file():
 
 
 import shutil
+
+
 # First import shutil into your program before using the copy function
 # copyfile() = copies content of a file
 # copy() = does the function of copyfile + permission mode + destination
@@ -742,7 +746,7 @@ def copy_a_file():
 # copy_a_file()
 
 
-def  move_a_file():
+def move_a_file():
     source = "copy.txt"
     destination = "C:\\Users\\PRINCE\\Desktop\\copy.txt"
     try:
@@ -781,7 +785,7 @@ def del_a_file():
 
 
 def modules():
-    # Module is a file that contain python code, may contain functions, classes etc
+    # Module is a file that contain python code, may contain functions, classes etc.
     # It is used with modular programming, which is to separate a program into parts.
     import messages
     messages.hello()
@@ -792,27 +796,139 @@ def modules():
     hello()
     help("modules")
 
+
 # modules()
 
 
 def new_game():
     guesses = []
-def check():
-    pass
-def score():
-    pass
+    correct_guess = 0
+    qst_num = 1
+
+    for key in questions:
+        print("----------------------")
+        print(key)
+
+        for i in options[qst_num - 1]:
+            print(i)
+
+        guess = input("\nEnter (A, B, C or D): ")
+        guess = guess.upper()
+        guesses.append(guess)
+
+        correct_guess += check_answer(questions.get(key), guess)
+        qst_num += 1
+
+    score(correct_guess, guesses)
+
+
+def check_answer(answer, guess):
+    if answer == guess:
+        print("\nCORRECT")
+        return 1
+    else:
+        print("\nWRONG")
+        return 0
+
+
+def score(correct_guess, guess):
+    print("----------------------")
+    print("RESULTS")
+    print("----------------------")
+    print("Answers: ", end=" ")
+
+    for i in questions:
+        print(questions.get(i), end=" ")
+    print()
+
+    print("Guesses: ", end=" ")
+
+    for i in guess:
+        print(i, end=" ")
+    print()
+
+    point = int(correct_guess / len(questions) * 100)
+    print("Your Score is: " + str(point) + "%")
+
+
 def play_again():
-    pass
+    response = input("Do you want to play again? (Y/N): ")
+    response = response.upper()
+
+    if response == "Y":
+        return True
+    else:
+        return False
 
 
 questions = {
     "Who created python?: ": "A",
     "What year was python created?: ": "B",
     "Python is attributed to which comedy group? ": "C",
-    "What is the shape of  the earth? ": "A"
+    "What is the shape of  the earth? ": "D"
 }
 
 options = [["A. Guido van Rossum", "B. Elon Musk", "C. Bill Gates", "D. Mark Zuckerberg"],
            ["A. 1989", "B. 1991", "C. 2000", "D. 2016"],
            ["A. Lonely Island", "B. Smosh", "C. Monty Python", "D. SNL"],
            ["A. Circle", "B. Square", "C. Triangle", "D. Sphere"]]
+
+
+def end():
+    while play_again():
+        print()
+        new_game()
+
+    print("\nBye See You Later")
+
+
+# new_game()
+# end()
+
+
+# Object--Oriented Programme
+def OOP():
+    from Cars import Car
+
+    car1 = Car("Toyota", "Camry", 2022, "Grey")
+    car2 = Car("Ford", "Mustang", 2023, "White")
+
+    print(car1.make)
+    print(car1.model)
+    print(car1.year)
+    print(car1.color)
+
+    car1.drive()
+    car2.stop()
+
+
+# OOP()
+
+
+# Class Variables
+
+def ClassVar():
+    from Cars import Car
+
+    car1 = Car("Toyota", "Camry", 2022, "Grey")
+    car2 = Car("Ford", "Mustang", 2023, "White")
+
+    car1.wheels = 2
+    Car.wheels = 2
+
+    print(car1.wheels)
+    print(car2.wheels)
+    print(Car.wheels)
+
+
+# ClassVar()
+
+
+# INHERITANCE
+
+def inheritance():
+    pass
+
+
+
+inheritance()
