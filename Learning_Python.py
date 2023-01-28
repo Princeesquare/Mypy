@@ -924,11 +924,4 @@ def ClassVar():
 # ClassVar()
 
 
-# INHERITANCE
 
-def inheritance():
-    pass
-
-
-
-inheritance()
