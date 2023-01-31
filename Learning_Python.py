@@ -888,7 +888,7 @@ def end():
 
 # Object--Oriented Programme
 def OOP():
-    from Cars import Car
+    from OOP import Car
 
     car1 = Car("Toyota", "Camry", 2022, "Grey")
     car2 = Car("Ford", "Mustang", 2023, "White")
@@ -908,7 +908,7 @@ def OOP():
 # Class Variables
 
 def ClassVar():
-    from Cars import Car
+    from OOP import Car
 
     car1 = Car("Toyota", "Camry", 2022, "Grey")
     car2 = Car("Ford", "Mustang", 2023, "White")
